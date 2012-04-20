@@ -1,4 +1,4 @@
-package Ircbuddy::Dynamic::Quiz::Subnetting;
+package Ircbuddy::Dynamic::Quiz::Netmask;
 use strict;
 use warnings;
 
@@ -6,7 +6,7 @@ use List::MoreUtils qw(pairwise);
 use Ircbuddy::Core::Tools qw/ _randomip _dec2bin _bin2dec /;
 
 
-
+=cut
 sub quiz {
     
         my $ip = &_randomip;
@@ -36,5 +36,5 @@ sub quiz {
         return @array;
     
 }
-
+=cut
 1;

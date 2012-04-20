@@ -10,7 +10,7 @@ sub go {
     my $message = $mess->{body};
 
  
-    if ($message =~ /^authlevel\s+\S+\s+(admin|moderator|contributor)/i) {
+    if ($message =~ /^authlevel\s+\S+\s+(admin|moderator|contributor|none|remove|delete)/i) {
     
     # get the user who is doing the command
   

@@ -5,9 +5,26 @@ use warnings;
 use List::MoreUtils qw(pairwise);
 use Ircbuddy::Core::Tools qw/ _randomip _dec2bin _bin2dec /;
 
+use Ircbuddy::Core::Utils;
+
+my $nu = Ircbuddy::Core::Utils->new;
+
+
+my @games = ('network', 'hostbits','networkbits');
+
+
 
 
 sub quiz {
+    my $rand = int(rand(@games));
+    my $sub = $games[$rand];
+    no strict "refs";
+    my @array = &$sub;
+
+    return @array;
+}
+
+sub network {
     
         my $ip = &_randomip;
         my $prefix = (int rand 25) + 8;
@@ -33,6 +50,22 @@ sub quiz {
         my $answer = join('.',@decimals);
         
         my @array = ($question,$answer);
+        return @array;
+    
+}
+sub hostbits {
+    my $random = int rand 128;
+    my $question = "How many host bits are required for $random hosts?";
+    my $answer = $nu->hostbits($random);
+            my @array = ($question,$answer);
+        return @array;
+    
+}
+sub networkbits {
+    my $random = int rand 128;
+    my $question = "How many network bits are required for $random networks?";
+    my $answer = $nu->networkbits($random);
+            my @array = ($question,$answer);
         return @array;
     
 }

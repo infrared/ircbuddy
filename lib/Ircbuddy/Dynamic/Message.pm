@@ -10,7 +10,7 @@ sub go {
     my ($self,$bot,$mess,$schema) = @_;
 
 	my $message = $mess->{body};
-        if ($message =~ /^message\s+new\s+\S+\s\S+/) {
+        if ($message =~ /^message\s+new\s+\S+\s+\S+/) {
                 my $from_user = $mess->{who};
                 my ($who,$what) = ($message =~ /^message\s+new\s+(\S+)\s+(.*)/);
                 my $insert = $schema->resultset('LaterTell')->create({
