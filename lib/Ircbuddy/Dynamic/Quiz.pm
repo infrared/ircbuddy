@@ -80,7 +80,7 @@ sub go {
     elsif ($message =~ /^quiz\s+(me|us)\s+on\s+\S+\s+\S+/i) {
 
         my (undef,$category,$level) = ($message =~ /^quiz\s+(me|us)\s+on\s+(\S+)\s+(\S+)/i);
-        ($question,$answer) = Ircbuddy::Dynamic::Quiz::SimplyQuiz->quiz($category,$level,$schema);
+        ($question,$answer) = Ircbuddy::Dynamic::Quiz::SimpleQuiz->quiz($category,$level,$schema);
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
         $bot->reply($mess,$question);
