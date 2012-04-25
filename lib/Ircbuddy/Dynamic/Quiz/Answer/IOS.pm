@@ -18,7 +18,7 @@ sub check {
     for my $each (@answers) {
 
         my @valid;
-        my ($first) = ($each =~ /(\w+)/);
+        my ($first) = ($each =~ /([\d\w\/]+)\(?/);
         push (@valid,$first);
 
         if ($each =~ /\(\S+\)/) {
@@ -30,7 +30,7 @@ sub check {
                         push @valid, $first . $_;
                 }
         }
-        return 0 unless grep($try[$x] eq $_,@valid);
+        return 0 unless grep(lc $try[$x] eq lc $_,@valid);
         $x++;
     }
     return 1;
