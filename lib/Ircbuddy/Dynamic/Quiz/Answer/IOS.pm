@@ -18,7 +18,7 @@ sub check {
     for my $each (@answers) {
 
         my @valid;
-        my ($first) = ($each =~ /([\d\w\/]+)\(?/);
+        my ($first) = ($each =~ /([\.\-\d\w\/]+)\(?/);
         push (@valid,$first);
 
         if ($each =~ /\(\S+\)/) {
