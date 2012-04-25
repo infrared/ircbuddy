@@ -38,13 +38,27 @@ sub go {
         
         if (exists $quiz->{$who}{answer}) {   
             my $answer = $quiz->{$who}{answer};
-            if ($try =~ /^$answer$/i) {
-                $bot->reply($mess,"correct!");
-                delete $quiz->{$who};
-                        
+            if (exists $quiz->{$who}{'type'}) {
+                
+                my $type = $quiz->{$who}{'type'};
+                my $module = "Ircbuddy::Dynamic::Quiz::Answer::". $type;
+                if ($module->check($answer,$try)) {
+                    $bot->reply($mess,"correct!");
+                    delete $quiz->{$who};
+                }
+                else {
+                    $bot->reply($mess,"nope :(");
+                }
             }
             else {
-                $bot->reply($mess,"nope :(");
+                if ($try =~ /^$answer$/i) {
+                    $bot->reply($mess,"correct!");
+                    delete $quiz->{$who};
+                        
+                }
+                else {
+                    $bot->reply($mess,"nope :(");
+                }
             }
         }
        
@@ -81,6 +95,7 @@ sub go {
 
         my (undef,$category,$level) = ($message =~ /^quiz\s+(me|us)\s+on\s+(\S+)\s+(\S+)/i);
         ($question,$answer) = Ircbuddy::Dynamic::Quiz::SimpleQuiz->quiz($category,$level,$schema);
+        $quiz->{$who}{type} = uc $category;
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
         $bot->reply($mess,$question);
