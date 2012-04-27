@@ -8,7 +8,6 @@ my %help = (
         relearn => "Relearn a definition. Syntax: relearn <term>: <definition>",
         forget  => "Deleted a definition. Syntax: forget <term>",
         search => "Searches the glossary. Syntax: search <term>",
-        question => "Question Builder. This feature enables you to build a multiple choice question. To start, type: new multiple choice question",
         register => "Register with me so you can help contribute. To register, type \"register\" in a private message with me",
         auth => "Authenticate with me. Must be registered. Syntax:  auth <password>",
         hex2bin => "Returns hex value in binary:  hex2bin <value>",
@@ -17,11 +16,12 @@ my %help = (
         broadcast => "Returns broadcast address of a given IP/prefix. Syntax: broadcast <address>/<prefix>",
         quiz => "Available quiz subjects: definitions, subnetting, bin2hex. Syntax: quiz me on <subject>",
         ip2hex => "Returns given IP address in hex. Syntax: ip2hex <address>",
-		messages => "Check for messages. Must be registered and auth'd. Syntax: messages",
-        "message new" => "Send a message to a user. Must be registered and auth\'d. Syntax: later tell: <user> <message>",
-        "message get" => "Get your message. Must be registered and auth\'d. Syntax: message get <id>",
-        "message del" => "Delete a message. Must be registered and auth\'d. Syntax: message del <id>",
-        listdefines =>  "List all definitions. Syntax: listdefines <page number>"
+		messages => "Messaging tool. Must be registered and auth'd. Syntax: messages, message new <user> <message>, message get <id>, message del <id>",
+        listdefines =>  "List all definitions. Syntax: listdefines <page number>",
+		source => "Returns a URL to my source code",
+		stats => "Returns database statistics",
+		repeat => "repeats a question",
+		calc  => "perform calculations using Google. Sytanx: calc <string>",
 );
 
 

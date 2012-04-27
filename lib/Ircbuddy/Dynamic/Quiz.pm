@@ -74,39 +74,27 @@ sub go {
     }
     elsif ($message =~ /^quiz\s+(me|us)\s+on\s+def(initions)?/i) {
         
-        
+        delete $quiz->{$who};
         ($question,$answer) = Ircbuddy::Dynamic::Quiz::Definitions->quiz($schema);
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
-         $bot->reply($mess,$question); 
+        $bot->reply($mess,$question); 
         
 
     }
     elsif ($message =~ /^quiz\s+(me|us)\s+on\s+subnet(ting)?/i) {
        
-       
+       delete $quiz->{$who};
        ($question,$answer) = Ircbuddy::Dynamic::Quiz::Subnetting->quiz;
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
         $bot->reply($mess,$question);    
         
     }
-    elsif ($message =~ /^quiz\s+(me|us)\s+on\s+\S+\s+\S+/i) {
-
-        my (undef,$category,$level) = ($message =~ /^quiz\s+(me|us)\s+on\s+(\S+)\s+(\S+)/i);
-        ($question,$answer) = Ircbuddy::Dynamic::Quiz::SimpleQuiz->quiz($category,$level,$schema);
-        $quiz->{$who}{type} = uc $category;
-        $quiz->{$who}{question} = $question;
-        $quiz->{$who}{answer}   = $answer;
-        $bot->reply($mess,$question);
-    }
-        
-        
-        
-    
+ 
     elsif ($message =~ /^quiz\s+(me|us)\s+on\s+(bin2hex|binary\s+to\s+hex)$/i) {
        
-       
+       delete $quiz->{$who};
        ($question,$answer) = Ircbuddy::Dynamic::Quiz::Bin2Hex->quiz;
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
@@ -115,7 +103,7 @@ sub go {
     }
     elsif ($message =~ /^quiz\s+(me|us)\s+on\s+multiple\s+choice$/i) {
        
-       
+       delete $quiz->{$who};
        ($question,$answer) = Ircbuddy::Dynamic::Quiz::MultipleChoice->quiz($schema);
         $quiz->{$who}{question} = $question;
         $quiz->{$who}{answer}   = $answer;
@@ -125,6 +113,17 @@ sub go {
         
         $bot->reply($mess,$question);    
         
+    }
+    # got here, must be a SimpleQuiz
+    
+    elsif ($message =~ /^quiz\s+(me|us)\s+on\s+\S+\s+\S+/i) {
+        delete $quiz->{$who};
+        my (undef,$category,$level) = ($message =~ /^quiz\s+(me|us)\s+on\s+(\S+)\s+(\S+)/i);
+        ($question,$answer) = Ircbuddy::Dynamic::Quiz::SimpleQuiz->quiz($category,$level,$schema);
+        $quiz->{$who}{type} = uc $category;
+        $quiz->{$who}{question} = $question;
+        $quiz->{$who}{answer}   = $answer;
+        $bot->reply($mess,$question);
     }
     elsif ($message =~ /^i\s+give\s+up$/i) {
         
