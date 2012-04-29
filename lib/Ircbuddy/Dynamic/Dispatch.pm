@@ -114,8 +114,16 @@ my %dispatch = (
         module => "Ircbuddy::Dynamic::Stats",
         auth => [qw/ admin moderator contributor /],
     },
+    test => {
+        module => "Ircbuddy::Dynamic::Test",
+        auth => [qw/ admin moderator contributor /],
+    },
     quiz => {
         module => "Ircbuddy::Dynamic::Quiz",
+    },
+    wiki => {
+        module => "Ircbuddy::Dynamic::Wiki",
+        
     },
     you => {
         module => "Ircbuddy::Dynamic::You",
