@@ -11,7 +11,7 @@ sub go {
     
     if ($message =~ /^(stats|status)$/) {
         my $glossary  = $schema->resultset('Glossary')->search->count;
-        my $questions = $schema->resultset('MCQuestions')->search->count;
+        my $questions = $schema->resultset('MCQuiz')->search->count;
         my $quiz      = $schema->resultset('SimpleQuiz')->search->count;
         $bot->reply($mess,"Glossary: $glossary, Multiple Choice: $questions, Quiz: $quiz");
     }
